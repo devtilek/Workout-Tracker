@@ -112,6 +112,23 @@ Protected endpoints require:
 Authorization: Bearer <jwt-token>
 ```
 
+## Quick API flow
+
+A typical client flow is:
+
+1. Register or log in to receive a JWT.
+2. Create a workout plan.
+3. Add exercises to the plan.
+4. Start a workout session from the plan.
+5. Log sets while training.
+6. Complete the session and review the summary.
+
+Example request header for protected endpoints:
+
+```http
+Authorization: Bearer <jwt-token>
+```
+
 ## Database
 
 Flyway creates:
