@@ -3,7 +3,7 @@ package com.workouttracker.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -13,17 +13,16 @@ import java.util.UUID;
 
 @Service
 public class JwtService {
-    public final SecretKey key;
+    private final SecretKey key;
     private final long expirationMs;
 
-
     public JwtService(@Value("${app.jwt.secret}") String secret,
-                      @Value("${app.jwt.expiration-ms}") long expirationMs){
+                      @Value("${app.jwt.expiration-ms}") long expirationMs) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         this.expirationMs = expirationMs;
     }
 
-    public String generate(UUID userId){
+    public String generate(UUID userId) {
         Date now = new Date();
         return Jwts.builder()
                 .subject(userId.toString())
@@ -33,12 +32,13 @@ public class JwtService {
                 .compact();
     }
 
-    public UUID parseUserId(String token){
+    public UUID parseUserId(String token) {
         Claims claims = Jwts.parser()
                 .verifyWith(key)
                 .build()
-                .parseEncryptedClaims(token)
+                .parseSignedClaims(token)
                 .getPayload();
+
         return UUID.fromString(claims.getSubject());
     }
 }

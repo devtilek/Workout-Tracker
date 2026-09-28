@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "workout_session")
+@Table(name = "workout_sessions")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -31,19 +31,23 @@ public class WorkoutSession {
     @Column(length = 100)
     private String name;
 
-    @Column(name = "started_at",nullable = false, updatable = false)
+    @Column(name = "started_at", nullable = false, updatable = false)
     private Instant startedAt;
+
+    @Column(name = "completed_at")
+    private Instant completedAt;
 
     @Column(columnDefinition = "text")
     private String notes;
 
-    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<SessionSet> sets = new ArrayList<>();
 
     @PrePersist
-    void onCreate(){
-        if (startedAt == null) startedAt = Instant.now();
+    void onCreate() {
+        if (startedAt == null) {
+            startedAt = Instant.now();
+        }
     }
-
 }

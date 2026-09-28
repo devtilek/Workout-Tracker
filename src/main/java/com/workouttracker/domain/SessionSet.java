@@ -23,7 +23,7 @@ public class SessionSet {
     private WorkoutSession session;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "exercise_id",nullable = false)
+    @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 
     @Column(name = "set_number", nullable = false)
@@ -35,7 +35,7 @@ public class SessionSet {
     private BigDecimal weight;
 
     @Column(name = "duration_seconds")
-    private BigDecimal durationSeconds;
+    private Integer durationSeconds;
 
     @Column(name = "distance_meters", precision = 8, scale = 2)
     private BigDecimal distanceMeters;

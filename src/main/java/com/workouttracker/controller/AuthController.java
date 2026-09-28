@@ -18,12 +18,12 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthService> register(@Valid @RequestBody Dtos.RegisterRequest request){
+    public ResponseEntity<Dtos.AuthResponse> register(@Valid @RequestBody Dtos.RegisterRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(request));
     }
 
     @PostMapping("/login")
-    public Dtos.AuthResponse login(@Valid @RequestBody Dtos.LoginRequest request){
+    public Dtos.AuthResponse login(@Valid @RequestBody Dtos.LoginRequest request) {
         return authService.login(request);
     }
 }
