@@ -27,16 +27,16 @@ public final class Dtos {
             String token) {}
 
     public record CreatePlanRequest(
-            @NotBlank String name,
-            String description) {}
+            @NotBlank @Size(max = 100) String name,
+            @Size(max = 2000) String description) {}
 
     public record AddPlanExerciseRequest(
             @NotNull UUID exerciseId,
-            Integer targetSets,
-            Integer targetReps,
-            BigDecimal targetWeight,
-            Integer orderIndex,
-            String notes) {}
+            @Min(1) Integer targetSets,
+            @Min(1) Integer targetReps,
+            @DecimalMin("0.0") BigDecimal targetWeight,
+            @Min(0) Integer orderIndex,
+            @Size(max = 2000) String notes) {}
 
     public record PlanExerciseResponse(
             UUID id, UUID exerciseId, String exerciseName,
