@@ -82,6 +82,7 @@ Controllers handle HTTP requests, services contain business rules, repositories 
 | GET | `/api/exercises` | List exercises |
 | GET | `/api/exercises?muscleGroup=Chest` | Filter by muscle group |
 | GET | `/api/exercises/{id}` | Get exercise |
+| GET | `/api/exercises/{id}` | Get exercise |
 
 ### Workout plans
 
