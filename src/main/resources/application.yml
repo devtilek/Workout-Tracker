@@ -3,19 +3,19 @@ spring:
     name: workout-tracker
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/workout_tracker
-    username: postgres
-    password: postgres
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/workout_tracker}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: validate          # Flyway рулит схемой, Hibernate только проверяет
+      ddl-auto: validate
     open-in-view: false
     properties:
       hibernate:
         format_sql: true
-    show-sql: true
+    show-sql: false
 
   flyway:
     enabled: true
@@ -23,9 +23,9 @@ spring:
     baseline-on-migrate: true
 
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
 
 app:
   jwt:
     secret: ${JWT_SECRET:change-me-in-production-please-32-chars-minimum}
-    expiration-ms: 604800000
+    expiration-ms: ${JWT_EXPIRATION_MS:604800000}
