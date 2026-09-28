@@ -47,7 +47,9 @@ public final class Dtos {
             UUID id, String name, String description,
             Instant createdAt, List<PlanExerciseResponse> exercises) {}
 
-    public record StartSessionRequest(UUID planId, String name) {}
+    public record StartSessionRequest(
+            UUID planId,
+            @Size(max = 100) String name) {}
 
     public record LogSetRequest(
             @NotNull UUID exerciseId,
